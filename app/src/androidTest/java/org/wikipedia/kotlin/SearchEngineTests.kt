@@ -47,11 +47,13 @@ class SearchEngineTests {
 
     @Test
     fun searchNoResultsTest() {
+        val text = "asdasdasd"
         BaseRobot().doOnView((withId(R.id.search_container)), click());
         BaseRobot().doOnView((withId(R.id.search_src_text)), typeText("sadfasdf1"));
-        BaseRobot().assertOnView((allOf(withId(R.id.results_text), withText("No results"), isDisplayed())), matches(withText("No results")))
-        onView(withId(R.id.recycler_view))
-                .check(matches(atPosition(0, withText("Test Text"))));
+        //BaseRobot().assertOnView((allOf(withId(R.id.results_text), withText("No results"), isDisplayed())), matches(withText("No results")))
+        onView(withId(R.id.results_text))
+                .check(matches(Utils.atPosition(0, withText("No results"))))
+
     }
 
     @Test
