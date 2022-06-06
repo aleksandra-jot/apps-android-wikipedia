@@ -1,6 +1,7 @@
 package org.wikipedia.kotlin
 
 import BaseRobot
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -49,6 +50,8 @@ class SearchEngineTests {
         BaseRobot().doOnView((withId(R.id.search_container)), click());
         BaseRobot().doOnView((withId(R.id.search_src_text)), typeText("sadfasdf1"));
         BaseRobot().assertOnView((allOf(withId(R.id.results_text), withText("No results"), isDisplayed())), matches(withText("No results")))
+        onView(withId(R.id.recycler_view))
+                .check(matches(atPosition(0, withText("Test Text"))));
     }
 
     @Test
