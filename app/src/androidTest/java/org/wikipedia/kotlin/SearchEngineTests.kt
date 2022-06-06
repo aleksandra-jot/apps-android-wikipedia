@@ -64,29 +64,29 @@ class SearchEngineTests {
         exploreScreenPage.typeTextExplorePage(text)
         print("gdzietojest")
         print(exploreScreenPage.getText(exploreScreenPage.getTextId))
-        assertEquals("No results",  exploreScreenPage.getText(exploreScreenPage.getTextId) )
-        //exploreScreenPage.assertSearchNoResult()
+        //assertEquals("No results",  exploreScreenPage.getText(exploreScreenPage.getTextId) )
+        exploreScreenPage.assertSearchNoResult()
       }
-//
-//    @Test
-//    fun addRecentSearchTest() {
-//        BaseRobot().doOnView((withId(R.id.search_container)), click())
-//        BaseRobot().doOnView((withId(R.id.search_src_text)), typeText("Donald Trump"))
-//        BaseRobot().doOnView((allOf(withId(R.id.page_list_item_title), withText("Donald Trump"), isDisplayed())), click())
-//        BaseRobot().doOnView((withId(R.id.page_toolbar_button_search)), click())
-//        BaseRobot().assertOnView((allOf(withText("Donald Trump"), isDisplayed())), matches(withText("Donald Trump")))
-//    }
-//
-//    @Test
-//    fun deleteRecentSearchesTest() {
-//        BaseRobot().doOnView((withId(R.id.search_container)), click())
-//        BaseRobot().doOnView((withId(R.id.search_src_text)), typeText("Donald Trump"))
-//        BaseRobot().doOnView((allOf(withId(R.id.page_list_item_title), withText("Donald Trump"), isDisplayed())), click())
-//        BaseRobot().doOnView((withId(R.id.page_toolbar_button_search)), click())
-//        BaseRobot().doOnView((withId(R.id.recent_searches_delete_button)), click())
-//        BaseRobot().doOnView((withText("Yes")), click())
-//        BaseRobot().assertOnView(withId(R.id.search_empty_image), matches(isDisplayed()))
-//    }
+
+    @Test
+    fun addRecentSearchTest() {
+        BaseRobot().doOnView((withId(R.id.search_container)), click())
+        BaseRobot().doOnView((withId(R.id.search_src_text)), typeText("Donald Trump"))
+        BaseRobot().doOnView((allOf(withId(R.id.page_list_item_title), withText("Donald Trump"), isDisplayed())), click())
+        BaseRobot().doOnView((withId(R.id.page_toolbar_button_search)), click())
+        BaseRobot().assertOnView((allOf(withText("Donald Trump"), isDisplayed())), matches(withText("Donald Trump")))
+    }
+
+    @Test
+    fun deleteRecentSearchesTest() {
+        BaseRobot().doOnView((withId(R.id.search_container)), click())
+        BaseRobot().doOnView((withId(R.id.search_src_text)), typeText("Donald Trump"))
+        BaseRobot().doOnView((allOf(withId(R.id.page_list_item_title), withText("Donald Trump"), isDisplayed())), click())
+        BaseRobot().doOnView((withId(R.id.page_toolbar_button_search)), click())
+        BaseRobot().doOnView((withId(R.id.recent_searches_delete_button)), click())
+        BaseRobot().doOnView((withText("Yes")), click())
+        BaseRobot().assertOnView(withId(R.id.search_empty_image), matches(isDisplayed()))
+    }
 
 }
 
