@@ -28,10 +28,12 @@ class SearchEngineTests {
 
     val exploreScreenPage = ExploreScreenPage()
     val searchScreenPage = SearchScreenPage()
+    val navBarScreenPage = NavBarPage()
+    val onboardingPage = OnboardingPage()
 
     @Before
     fun beforeTests() {
-        BaseRobot().doOnView(allOf(withId(R.id.fragment_onboarding_skip_button), isDisplayed()), click())
+        onboardingPage.clickOnSkipButton()
     }
 
     @Rule
@@ -42,7 +44,7 @@ class SearchEngineTests {
 
     @Test
     fun searchBarTest() {
-    val text = "Donald Trump"
+        val text = "Donald Trump"
         exploreScreenPage.clickOnSearchBarExplorePage()
         exploreScreenPage.typeTextExplorePage(text)
         exploreScreenPage.assertSearchItemTitle(text)
@@ -51,7 +53,7 @@ class SearchEngineTests {
     @Test
     fun searchPageTest() {
         val text ="Donald Trump"
-        searchScreenPage.clickOnSearchNavButton()
+        navBarScreenPage.clickOnSearchNavButton()
         searchScreenPage.clickOnSearchBarSearchPage()
         searchScreenPage.typeTextSearchPage(text)
         searchScreenPage.assertSearchItemTitle(text)
@@ -62,31 +64,29 @@ class SearchEngineTests {
         val text = "asdasdad"
         exploreScreenPage.clickOnSearchBarExplorePage();
         exploreScreenPage.typeTextExplorePage(text)
-        print("gdzietojest")
-        print(exploreScreenPage.getText(exploreScreenPage.getTextId))
-        //assertEquals("No results",  exploreScreenPage.getText(exploreScreenPage.getTextId) )
         exploreScreenPage.assertSearchNoResult()
-      }
+    }
 
     @Test
     fun addRecentSearchTest() {
-        BaseRobot().doOnView((withId(R.id.search_container)), click())
-        BaseRobot().doOnView((withId(R.id.search_src_text)), typeText("Donald Trump"))
-        BaseRobot().doOnView((allOf(withId(R.id.page_list_item_title), withText("Donald Trump"), isDisplayed())), click())
-        BaseRobot().doOnView((withId(R.id.page_toolbar_button_search)), click())
-        BaseRobot().assertOnView((allOf(withText("Donald Trump"), isDisplayed())), matches(withText("Donald Trump")))
+        val text = "Donald Trump"
+        exploreScreenPage.clickOnSearchBarExplorePage();
+        exploreScreenPage.typeTextExplorePage(text)
+        exploreScreenPage.clickOnSearchItemTitle(text)
+        exploreScreenPage.clickOnSearchToolbarButton()
+        exploreScreenPage.assertRecentSearchItemTitle(text)
     }
 
     @Test
     fun deleteRecentSearchesTest() {
-        BaseRobot().doOnView((withId(R.id.search_container)), click())
-        BaseRobot().doOnView((withId(R.id.search_src_text)), typeText("Donald Trump"))
-        BaseRobot().doOnView((allOf(withId(R.id.page_list_item_title), withText("Donald Trump"), isDisplayed())), click())
-        BaseRobot().doOnView((withId(R.id.page_toolbar_button_search)), click())
-        BaseRobot().doOnView((withId(R.id.recent_searches_delete_button)), click())
-        BaseRobot().doOnView((withText("Yes")), click())
-        BaseRobot().assertOnView(withId(R.id.search_empty_image), matches(isDisplayed()))
-    }
-
+        val text = "Donald Trump"
+        exploreScreenPage.clickOnSearchBarExplorePage();
+        exploreScreenPage.typeTextExplorePage(text)
+        exploreScreenPage.clickOnSearchItemTitle(text)
+        exploreScreenPage.clickOnSearchToolbarButton()
+        exploreScreenPage.clickOnDeleteRecentSearchesButton()
+        exploreScreenPage.clickOnYesButton()
+        exploreScreenPage.assertDeletedResults()
+     }
 }
 
