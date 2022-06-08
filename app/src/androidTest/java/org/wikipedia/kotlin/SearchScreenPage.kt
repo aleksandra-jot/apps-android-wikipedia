@@ -25,7 +25,7 @@ class SearchScreenPage {
 
     fun assertSearchItemTitle(text: String) {
         TestUtil.delay(1)
-        BaseRobot().assertOnView(searchResultsList, matches(hasDescendant(withText(text))))
+        BaseRobot().assertOnView(searchResultsList, matches(Utils.atPosition(0, hasDescendant(withText(text)))))
     }
 
 }

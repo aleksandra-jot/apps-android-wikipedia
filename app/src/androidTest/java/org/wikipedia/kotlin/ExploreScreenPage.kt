@@ -1,18 +1,13 @@
 package org.wikipedia.kotlin
 
 import BaseRobot
-import android.view.View
-import android.widget.TextView
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
-import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import org.hamcrest.Matchers.*
 import org.wikipedia.R
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import org.hamcrest.Matcher
+import org.wikipedia.TestUtil
 
 
 class ExploreScreenPage {
@@ -35,10 +30,8 @@ class ExploreScreenPage {
     }
 
     fun assertRecentSearchItemTitle(text: String) {
-        //TestUtil.delay(1)
+        TestUtil.delay(1)
         BaseRobot().assertOnView(recentSearchesList, matches(hasDescendant(withText(text))))
-
-        // BaseRobot().assertOnView(allOf(withText(text), isDisplayed()), matches(withText(text)))
     }
 
     fun clickOnSearchItemTitle(text: String) {
@@ -62,52 +55,12 @@ class ExploreScreenPage {
     }
 
     fun assertSearchNoResult() {
-       // TestUtil.delay(1)
-        BaseRobot().assertOnView(searchResultsList, matches(hasDescendant(withText("No results"))))
-    }
+        TestUtil.delay(1)
+        BaseRobot().assertOnView(searchResultsList, matches(Utils.atPosition(0, hasDescendant(withText("No results")))))}
 
     fun assertSearchResultsList(text: String) {
-        //TestUtil.delay(1)
-        BaseRobot().assertOnView(searchResultsList, matches(hasDescendant(withText(text))))
+        TestUtil.delay(1)
+        BaseRobot().assertOnView(searchResultsList, matches(Utils.atPosition(0, hasDescendant(withText(text)))))
     }
-
-    fun getText(matcher: ViewInteraction): String {
-        var text = String()
-        matcher.perform(object : ViewAction {
-            override fun getConstraints(): Matcher<View> {
-                return isAssignableFrom(TextView::class.java)
-            }
-
-            override fun getDescription(): String {
-                return "Text of the view"
-            }
-
-            override fun perform(uiController: UiController, view: View) {
-                val tv = view as TextView
-                text = tv.text.toString()
-            }
-        })
-
-        return text
-    }
-//
-//    fun assert() {
-//        fun ViewInteraction.isDisplayed(): Boolean {
-//            try {
-//                check(matches(ViewMatchers.isDisplayed()))
-//                return true
-//            } catch (e: Exception) {
-//                return false
-//            }
-//        }
-//
-//        if(onView(withText("Donalsd Trump")).isDisplayed()) {
-//           Log.i("OK", "jest super")
-//        } else {
-//            Log.i("NIE OK", "nie jest super")
-//        }
-//
-//
-//    }
-
 }
+
