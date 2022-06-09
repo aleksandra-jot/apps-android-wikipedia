@@ -1,8 +1,9 @@
-package org.wikipedia
+package org.wikipedia.pages
 
 import android.os.SystemClock
 import android.util.Log
 import android.view.View
+import androidx.test.espresso.AmbiguousViewMatcherException
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.UiController
@@ -17,17 +18,21 @@ class BasePage {
      * This is a workaround for case where one wants to check if view exists without doing anything to it.
      * If the view is not in view hierarchy (matcher is wrong), a NoMatchingViewException is thrown
      */
-    protected fun viewExists(matcher: Matcher<View>): Boolean {
+    fun viewExists(matcher: Matcher<View>): Boolean {
         return try {
             onView(matcher).perform(noAction())
             true
-        } catch (e: NoMatchingViewException) {
+        }
+        catch (e: AmbiguousViewMatcherException) {
+            true
+        }
+        catch (e: NoMatchingViewException) {
             false
         }
     }
 
 
-    protected fun waitForView(
+    fun waitForView(
             viewMatcher: Matcher<View>,
             timeout: Long = 15,
             errorMessage: String = "View '$viewMatcher' was not found. Waited for: $timeout seconds",

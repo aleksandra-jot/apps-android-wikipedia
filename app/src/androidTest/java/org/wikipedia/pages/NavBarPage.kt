@@ -1,6 +1,5 @@
-package org.wikipedia.kotlin
+package org.wikipedia.pages
 
-import BaseRobot
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 

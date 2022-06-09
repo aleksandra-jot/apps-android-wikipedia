@@ -1,4 +1,4 @@
-package org.wikipedia.kotlin
+package org.wikipedia
 
 import android.view.View
 import androidx.annotation.NonNull
