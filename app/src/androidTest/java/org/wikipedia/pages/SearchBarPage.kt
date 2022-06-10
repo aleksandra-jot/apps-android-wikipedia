@@ -5,6 +5,7 @@ import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
 import org.hamcrest.Matchers.allOf
 import org.wikipedia.R
+import org.wikipedia.Utils
 
 
 class SearchBarPage {
@@ -43,5 +44,9 @@ class SearchBarPage {
 
     fun tapOnYesButton() {
         onView(yesButton).perform(click())
+    }
+
+    fun getTextOfElement() {
+        Utils.getTextOf(onView(yesButton))
     }
 }

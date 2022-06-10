@@ -2,6 +2,7 @@ package org.wikipedia.tests
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -33,7 +34,7 @@ class SearchEngineTests {
         val text = "Donald Trump"
         explorePage.tapOnSearchBar()
         searchBarPage.typeTextSearch(text)
-        assertTrue("blabla", searchBarPage.isDisplayed(text))
+        assertTrue("No view matched '$text'", searchBarPage.isDisplayed(text))
        }
 
     @Test
@@ -42,7 +43,7 @@ class SearchEngineTests {
         navBarPage.clickOnSearchNavButton()
         searchPage.tapOnSearchBar()
         searchBarPage.typeTextSearch(text)
-        assertTrue("blabla", searchBarPage.isDisplayed(text))
+        assertTrue("No view matched '$text'", searchBarPage.isDisplayed(text))
     }
 
     @Test
@@ -50,7 +51,7 @@ class SearchEngineTests {
         val text = "asdasdad"
         explorePage.tapOnSearchBar()
         searchBarPage.typeTextSearch(text)
-        assertTrue("blabla", searchBarPage.isDisplayedNoResults())
+        assertTrue("No view matched 'No results'", searchBarPage.isDisplayedNoResults())
     }
 
     @Test
@@ -60,7 +61,7 @@ class SearchEngineTests {
         searchBarPage.typeTextSearch(text)
         searchBarPage.tapOnSearchItemTitle(text)
         articlePage.tapOnSearchBar()
-        assertTrue("blabla", searchBarPage.isDisplayed(text))
+        assertTrue("No view matched '$text'", searchBarPage.isDisplayed(text))
     }
 
     @Test
@@ -72,6 +73,7 @@ class SearchEngineTests {
         articlePage.tapOnSearchBar()
         searchBarPage.tapOnDeleteRecentSearchesButton()
         searchBarPage.tapOnYesButton()
-        assertTrue(searchBarPage.isDisplayedEmptyPage())
+        //assertEquals(searchBarPage.getTextOfElement(), "Yes")
+        assertTrue("No view matched '$text'", searchBarPage.isDisplayedEmptyPage())
      }
 }
