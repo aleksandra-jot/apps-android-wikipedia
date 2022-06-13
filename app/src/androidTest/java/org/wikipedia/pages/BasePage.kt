@@ -11,7 +11,7 @@ import androidx.test.espresso.ViewAction
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
 
-class BasePage {
+open class BasePage {
     private val uiTestsTag = "AUTO_TESTS"
 
     /**

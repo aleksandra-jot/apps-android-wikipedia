@@ -8,9 +8,9 @@ import org.wikipedia.R
 
 
 
-class SearchBarPage {
+class SearchBarPage : BasePage() {
 
-    private val text: String = "Donald Trump"
+    private var text: String = ""
     private val searchTextInput = withId(R.id.search_src_text)
     private val pageList = withId(R.id.page_list_item_title)
     private val recentSearchesDeleteButton = withId(R.id.recent_searches_delete_button)
@@ -24,19 +24,19 @@ class SearchBarPage {
     }
 
     fun isDisplayedElement(): Boolean {
-        return BasePage().viewExists(resultText)
+        return viewExists(resultText)
     }
 
     fun isDisplayedNoResults():Boolean {
-        return BasePage().waitForView(hasDescendant(withText("No results")))
+        return waitForView(hasDescendant(withText("No results")))
     }
 
     fun isDisplayedEmptyPage():Boolean {
-        return BasePage().waitForView(emptyImage)
+        return waitForView(emptyImage)
     }
 
     fun tapOnSearchItemTitle(text: String) {
-        BasePage().waitForView(pageList)
+        waitForView(pageList)
         onView(allOf(pageList, withText(text), isDisplayed())).perform(click())
     }
 
