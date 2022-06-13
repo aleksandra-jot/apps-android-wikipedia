@@ -22,28 +22,30 @@ class SearchEngineTests {
 
     @Before
     fun beforeTests() {
-        onboardingPage.clickOnSkipButton()
+        onboardingPage.tapOnSkipButton()
     }
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityScenarioRule(MainActivity::class.java)
 
+
     @Test
     fun searchBarTest() {
         val text = "Donald Trump"
         explorePage.tapOnSearchBar()
         searchBarPage.typeTextSearch(text)
-        assertTrue("No view matched '$text'", searchBarPage.isDisplayed(text))
+        assertTrue("No view matched '$text'", searchBarPage.isDisplayedElement())
        }
 
     @Test
     fun searchPageTest() {
         val text ="Donald Trump"
-        navBarPage.clickOnSearchNavButton()
+        assertEquals(navBarPage.getTextBtn(), "Search")
+        navBarPage.tapOnSearchNavButton()
         searchPage.tapOnSearchBar()
         searchBarPage.typeTextSearch(text)
-        assertTrue("No view matched '$text'", searchBarPage.isDisplayed(text))
+        assertTrue("No view matched '$text'", searchBarPage.isDisplayedElement())
     }
 
     @Test
@@ -61,7 +63,7 @@ class SearchEngineTests {
         searchBarPage.typeTextSearch(text)
         searchBarPage.tapOnSearchItemTitle(text)
         articlePage.tapOnSearchBar()
-        assertTrue("No view matched '$text'", searchBarPage.isDisplayed(text))
+        assertTrue("No view matched '$text'", searchBarPage.isDisplayedElement())
     }
 
     @Test
