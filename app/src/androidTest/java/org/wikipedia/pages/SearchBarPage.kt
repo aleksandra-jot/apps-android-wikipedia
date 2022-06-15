@@ -25,16 +25,6 @@ class SearchBarPage : BasePage() {
         onView(searchTextInput).perform(typeText(text))
     }
 
-   // fun searchResultForText(): Matcher<View>? = hasDescendant(resultList)
-
-    fun resultElementIsDisplayedOnTheList(): Boolean {
-        return viewExists(resultText)
-    }
-
-    fun isDisplayedEmptyPage():Boolean {
-        return waitForView(emptyImage)
-    }
-
     fun tapOnSearchItemTitle(text: String) {
         waitForView(pageList)
         onView(allOf(pageList, withText(text), isDisplayed())).perform(click())
@@ -48,12 +38,22 @@ class SearchBarPage : BasePage() {
         onView(yesButton).perform(click())
     }
 
-    fun waitForFor() {
-        waitForView(noResultText)
-    }
-
     fun getTextOfNoResultsList(): String {
         waitForView(noResultText)
         return getTextOf(onView(noResultText))
+    }
+
+   // fun searchResultForText(): Matcher<View>? = hasDescendant(searchResultsList)
+
+    fun resultElementIsDisplayedOnTheList(): Boolean {
+        return viewExists(resultText)
+    }
+
+    fun isDisplayedEmptyPage():Boolean {
+        return waitForView(emptyImage)
+    }
+
+    fun waitForFor() {
+        waitForView(noResultText)
     }
 }
