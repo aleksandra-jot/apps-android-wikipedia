@@ -29,45 +29,45 @@ class SearchEngineTests {
     @JvmField
     var mActivityTestRule = ActivityScenarioRule(MainActivity::class.java)
 
-
     @Test
-    fun searchBarTest() {
+    fun searchFromExplorePage() {
         var text = "Donald Trump"
         explorePage.tapOnSearchBar()
         searchBarPage.typeTextSearch(text)
-        assertTrue("No view matched '$text'", searchBarPage.isDisplayedElement())
+        assertTrue("No view matched '$text'", searchBarPage.resultElementIsDisplayedOnTheList())
        }
 
     @Test
-    fun searchPageTest() {
+    fun searchFromSearchPage() {
         val text ="Donald Trump"
-       // assertEquals(navBarPage.getTextBtn(), "Search")
         navBarPage.tapOnSearchNavButton()
         searchPage.tapOnSearchBar()
         searchBarPage.typeTextSearch(text)
-        assertTrue("No view matched '$text'", searchBarPage.isDisplayedElement())
+        assertTrue("No view matched '$text'", searchBarPage.resultElementIsDisplayedOnTheList())
     }
 
     @Test
-    fun searchNoResultsTest() {
-        val text = "asdasdad"
+    fun searchNoResults() {
+        val textTyped = "asasdasdad"
         explorePage.tapOnSearchBar()
-        searchBarPage.typeTextSearch(text)
-        assertTrue("No view matched 'No results'", searchBarPage.isDisplayedNoResults())
+        searchBarPage.typeTextSearch(textTyped)
+        //searchBarPage.waitForFor()
+        //assertEquals("No results", searchBarPage.searchResultForText())
+        assertEquals("No results", searchBarPage.getTextOfNoResultsList()  )
     }
 
     @Test
-    fun addRecentSearchTest() {
+    fun addRecentSearch() {
         val text = "Donald Trump"
         explorePage.tapOnSearchBar()
         searchBarPage.typeTextSearch(text)
         searchBarPage.tapOnSearchItemTitle(text)
         articlePage.tapOnSearchBar()
-        assertTrue("No view matched '$text'", searchBarPage.isDisplayedElement())
+        assertTrue("No view matched '$text'", searchBarPage.resultElementIsDisplayedOnTheList())
     }
 
     @Test
-    fun deleteRecentSearchesTest() {
+    fun deleteRecentSearches() {
         val text = "Donald Trump"
         explorePage.tapOnSearchBar()
         searchBarPage.typeTextSearch(text)
@@ -75,7 +75,6 @@ class SearchEngineTests {
         articlePage.tapOnSearchBar()
         searchBarPage.tapOnDeleteRecentSearchesButton()
         searchBarPage.tapOnYesButton()
-        //assertEquals(searchBarPage.getTextOfElement(), "Yes")
         assertTrue("No view matched '$text'", searchBarPage.isDisplayedEmptyPage())
      }
 }

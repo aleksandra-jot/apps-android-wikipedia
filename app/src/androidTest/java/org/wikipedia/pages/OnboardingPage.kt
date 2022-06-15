@@ -7,11 +7,9 @@ import org.wikipedia.R
 
 class OnboardingPage {
 
-
     val skipButton = ViewMatchers.withId(R.id.fragment_onboarding_skip_button)
 
     fun tapOnSkipButton() {
         onView(skipButton).perform(click())
-
     }
 }
