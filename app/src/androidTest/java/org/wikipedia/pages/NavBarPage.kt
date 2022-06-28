@@ -16,7 +16,7 @@ class NavBarPage: BasePage() {
         onView(searchNavButton).perform(click());
     }
 
-    fun tapOnMoreNavButton() {
+    fun tapMoreOption() {
         onView(moreNavButton).perform(click());
     }
 
@@ -24,7 +24,7 @@ class NavBarPage: BasePage() {
         getTextOf(onView(withId(R.id.navigation_bar_item_small_label_view)))
     }
 
-    fun tapOnDonateButton() {
+    fun tapDonateOption() {
         onView(donateButton).perform(click());
     }
 }
