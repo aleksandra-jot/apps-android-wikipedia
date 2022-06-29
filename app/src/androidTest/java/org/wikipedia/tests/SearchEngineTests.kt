@@ -1,9 +1,11 @@
 package org.wikipedia.tests
 
+import androidx.test.espresso.intent.Intents
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -19,10 +21,18 @@ class SearchEngineTests {
     val navBarPage = NavBarPage()
     val onboardingPage = OnboardingPage()
     val articlePage = ArticlePage()
+    val settingsPage = SettingsPage()
 
     @Before
     fun beforeTests() {
+        Intents.init()
         onboardingPage.tapOnSkipButton()
+
+    }
+
+    @After
+    fun afterTests() {
+        Intents.release()
     }
 
     @Rule
@@ -51,8 +61,6 @@ class SearchEngineTests {
         val textTyped = "asasdasdad"
         explorePage.tapOnSearchBar()
         searchBarPage.typeTextSearch(textTyped)
-        //searchBarPage.waitForFor()
-        //assertEquals("No results", searchBarPage.searchResultForText())
         assertEquals("No results", searchBarPage.getTextOfNoResultsList()  )
     }
 
@@ -77,4 +85,11 @@ class SearchEngineTests {
         searchBarPage.tapOnYesButton()
         assertTrue("No view matched '$text'", searchBarPage.isDisplayedEmptyPage())
      }
+
+    @Test
+    fun checkSettingsPage() {
+        navBarPage.tapOnMoreNavButton()
+        navBarPage.tapOnSettingsButton()
+        //assertTrue("No view matched Settings page", settingsPage.isDisplayedSettingsTitle())
+    }
 }
