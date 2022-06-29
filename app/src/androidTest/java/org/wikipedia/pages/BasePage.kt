@@ -1,11 +1,15 @@
 package org.wikipedia.pages
 
+import android.app.Activity
+import android.app.Instrumentation
 import android.os.SystemClock
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.test.espresso.*
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.intent.Intents
+import androidx.test.espresso.intent.matcher.IntentMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
@@ -85,5 +89,10 @@ open class BasePage {
         })
 
         return text
+    }
+
+    fun stubAllExternalIntents() {
+        Intents.intending(CoreMatchers.not(IntentMatchers.isInternal()))
+            .respondWith(Instrumentation.ActivityResult(Activity.RESULT_OK, null))
     }
 }
