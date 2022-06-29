@@ -17,7 +17,7 @@ class NavBarPage: BasePage() {
         onView(searchNavButton).perform(click());
     }
 
-    fun tapOnMoreNavButton() {
+    fun tapMoreOption() {
         onView(moreNavButton).perform(click());
     }
 
